@@ -1,0 +1,26 @@
+{
+  "name": "shop-search",
+  "version": "1.0.0",
+  "description": "WAW JS 2018 - Search in E-shops",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --colors test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m1k1o/shop-search.git"
+  },
+  "author": "m1k1o",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/m1k1o/shop-search/issues"
+  },
+  "homepage": "https://github.com/m1k1o/shop-search#readme",
+  "dependencies": {
+    "async": "^2.6.1",
+    "cheerio": "^1.0.0-rc.2",
+    "mocha": "^5.2.0",
+    "request": "^2.88.0",
+    "rewire": "^4.0.1"
+  }
+}
