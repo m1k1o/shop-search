@@ -14,11 +14,11 @@ Fetch products from selected eshop.
 const shopSearch = require("./index.js")
 
 shopSearch.getOffer({
-	serp_url: 'https://www.okay.sk/hladanie/?query=',
-	item: '.crossroad-products-big li .inner',
-	name: '.title a',
-	price: '.price .highlight span',
-	url: '.title a'
+    serp_url: 'https://www.okay.sk/hladanie/?query=',
+    item: '.crossroad-products-big li .inner',
+    name: '.title a',
+    price: '.price .highlight span',
+    url: '.title a'
 }, 'iphone 7', (error, data) => {
     console.log(data)
 })
@@ -98,20 +98,20 @@ Fetch products from selected eshops.
 const shopSearch = require("./index.js")
 
 shopSearch.getOffers({
-	mall: {
-		serp_url: (query) => 'https://www.mall.sk/hladaj?s='+query,
-		item: ($, cb) => $('.lst-item').each(cb),
-		name: (elem) => elem.find('.lst-product-item-title a').text().trim(),
-		price: (elem) => parsePrice(elem.find('.lst-product-item-price-value').text()),
-		url: (elem) => 'https://www.mall.sk'+elem.find('.lst-product-item-title a').attr('href')
-	},
-	okay: {
-		serp_url: 'https://www.okay.sk/hladanie/?query=',
-		item: '.crossroad-products-big li .inner',
-		name: '.title a',
-		price: '.price .highlight span',
-		url: '.title a'
-	}
+    mall: {
+        serp_url: (query) => 'https://www.mall.sk/hladaj?s='+query,
+        item: ($, cb) => $('.lst-item').each(cb),
+        name: (elem) => elem.find('.lst-product-item-title a').text().trim(),
+        price: (elem) => parsePrice(elem.find('.lst-product-item-price-value').text()),
+        url: (elem) => 'https://www.mall.sk'+elem.find('.lst-product-item-title a').attr('href')
+    },
+    okay: {
+        serp_url: 'https://www.okay.sk/hladanie/?query=',
+        item: '.crossroad-products-big li .inner',
+        name: '.title a',
+        price: '.price .highlight span',
+        url: '.title a'
+    }
 }, 'iphone 7', (error, data) => {
     console.log(data)
 })
@@ -120,7 +120,7 @@ shopSearch.getOffers({
 ## Syntax:
 ```js
 shopSearch.getOffers({
-	shop1: /*eshop_rules*/,
+    shop1: /*eshop_rules*/,
     shop2: /*eshop_rules*/,
     // ...
 }, query, callback)
