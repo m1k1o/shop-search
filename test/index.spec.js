@@ -2,16 +2,20 @@ const rewire = require('rewire')
 const assert = require("assert")
 const fs = require("fs")
 
-const alza = require("./responses/alza.js")
-const mall = require("./responses/mall.js")
-const okay = require("./responses/okay.js")
-const expected_response = { okay, alza, mall }
+const shops = require("./shops.object.js")
+const expected_response = {
+	okay: require("./responses/okay.js"),
+	alza: require("./responses/alza.js"),
+	mall: require("./responses/mall.js")
+}
 
-let shopSearch = rewire("./index.js")
+
+// Emulate HTTP requests
+let shopSearch = rewire("../index.js")
 let response404 = false
 shopSearch.__set__("request", (url, cb) => response404
     ? cb(null, { statusCode: 404 }, null)
-    : fs.readdir('responses/', (e, files) => {
+    : fs.readdir(`${__dirname}/responses`, (e, files) => {
         let file = files.find((file) => url.includes(
             file.replace(/\..*$/, '')))
 
@@ -19,22 +23,36 @@ shopSearch.__set__("request", (url, cb) => response404
             return cb(null, { statusCode: 404 }, null)
         }
 
-        fs.readFile('responses/'+file, (e, d) => 
+        fs.readFile(`${__dirname}/responses/${file}`, (e, d) => 
             cb(null, { statusCode: e ? 404 : 200 }, d))
     })
 )
 
 describe("shopSearch: getOffers", function() {
-    it("shopSearch is working as expected", function(done) {
-      shopSearch.getOffers('iphone 7', (e, d) => {
-          assert.deepEqual(d, expected_response)
-          done(e)
-      })
+    it("shopSearch is working as expected with Object", function(done) {
+		shopSearch.getOffers(shops, 'iphone 7', (e, d) => {
+		    assert.deepEqual(d, expected_response)
+		    done(e)
+		})
+	})
+	
+    it("shopSearch is working as expected with Array too", function(done) {
+		const shops_Array = Object.values(shops)
+		const expected_response_Array = Object.values(expected_response)
+
+		shopSearch.getOffers(shops_Array, 'iphone 7', (e, d) => {
+			// Any order
+			for (const i in expected_response_Array) {
+				assert(d.indexOf(expected_response_Array[i]))
+			}
+
+		    done(e)
+		})
     })
 
     it("shopSearch fails on 404", function(done) {
         response404 = true
-        shopSearch.getOffers('iphone 7', (e, d) => {
+        shopSearch.getOffers(shops, 'iphone 7', (e, d) => {
             response404 = false
             assert(e instanceof Error)
             done()
@@ -71,5 +89,14 @@ describe("shopSearch: sortProducts", function() {
         let offers = shopSearch.sortProducts(undefined, true)
         assert(Array.isArray(offers))
         assert.equal(offers.length, 0)
+    })
+})
+  
+describe("shopSearch: parsePrice", function() {
+    it("parsePrice works correctly with commas", function() {
+        assert.equal(shopSearch.parsePrice('Price: 37,52 €'), 37.52)
+    })
+    it("parsePrice ignored dots", function() {
+        assert.equal(shopSearch.parsePrice('Price: 3.537,52 €'), 3537.52)
     })
 })

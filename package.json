@@ -4,7 +4,7 @@
   "description": "WAW JS 2018 - Search in E-shops",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --colors test.js"
+    "test": "mocha --colors"
   },
   "repository": {
     "type": "git",
