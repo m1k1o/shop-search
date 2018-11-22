@@ -28,15 +28,25 @@ shopSearch.__set__("request", (url, cb) => response404
     })
 )
 
+describe("shopSearch: getOffer", function() {
+    it("getOffer is working as expected", function(done) {
+        let shop_name = Object.keys(expected_response)[0]
+		shopSearch.getOffer(shops[shop_name], 'iphone 7', (e, d) => {
+		    assert.deepEqual(d, expected_response[shop_name])
+		    done(e)
+		})
+    })
+})
+
 describe("shopSearch: getOffers", function() {
-    it("shopSearch is working as expected with Object", function(done) {
+    it("getOffers is working as expected with Object", function(done) {
 		shopSearch.getOffers(shops, 'iphone 7', (e, d) => {
 		    assert.deepEqual(d, expected_response)
 		    done(e)
 		})
 	})
 	
-    it("shopSearch is working as expected with Array too", function(done) {
+    it("getOffers is working as expected with Array too", function(done) {
 		const shops_Array = Object.values(shops)
 		const expected_response_Array = Object.values(expected_response)
 
@@ -50,7 +60,7 @@ describe("shopSearch: getOffers", function() {
 		})
     })
 
-    it("shopSearch fails on 404", function(done) {
+    it("getOffers fails on 404", function(done) {
         response404 = true
         shopSearch.getOffers(shops, 'iphone 7', (e, d) => {
             response404 = false
