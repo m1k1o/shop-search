@@ -2,7 +2,7 @@
 WAW JS 2018 - Search in E-shops (bonus)
 
 ## Install
-```
+```bash
 npm install
 ```
 
@@ -13,7 +13,7 @@ Fetch products from eshops.
  - https://mall.sk
 
 ## Example
-```
+```js
 const shopSearch = require("./index.js")
 
 shopSearch.getOffers('iphone 7', (error, data) => {
@@ -22,7 +22,7 @@ shopSearch.getOffers('iphone 7', (error, data) => {
 ```
 
 ## Syntax:
-```
+```js
 shopSearch.getOffers(query, callback)
 ```
 
@@ -32,7 +32,7 @@ shopSearch.getOffers(query, callback)
 
 ## Return value
 A new array with each shop with products being the result of the callback function.
-```
+```js
 [
     okay: [
         {
@@ -51,7 +51,7 @@ A new array with each shop with products being the result of the callback functi
 Examine returned data and sort product from cheapest or most expensive.
 
 ## Example
-```
+```js
 const shopSearch = require("./index.js")
 
 shopSearch.getOffers('iphone 7', (error, data) => {
@@ -61,7 +61,7 @@ shopSearch.getOffers('iphone 7', (error, data) => {
 ```
 
 ## Syntax:
-```
+```js
 shopSearch.sortProducts(offers, reverse)
 ```
 
@@ -73,7 +73,7 @@ shopSearch.sortProducts(offers, reverse)
 
 ## Return value
 A new array with sorted products being the result of the callback function.
-```
+```js
 [
     {
         shop: 'okay',
