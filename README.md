@@ -68,8 +68,8 @@ shopSearch.sortProducts(offers, reverse)
 ### Parameters
  - *offers* - Offers returned from `getOffers` function.
  - *reverse* - Sort order.
-   -- **false** - get cheaapest products. (*default*)
-   -- **true** - get most expensive
+   - **false** - get cheaapest products. (*default*)
+   - **true** - get most expensive
 
 ## Return value
 A new array with sorted products being the result of the callback function.
