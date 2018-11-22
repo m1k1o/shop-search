@@ -91,4 +91,4 @@ let getOffers = (query, cb) => {
 	async.parallel(tasks, cb)
 }
 
-module.exports = { getOffers, bestOffers }
+module.exports = { getOffers, sortProducts }
