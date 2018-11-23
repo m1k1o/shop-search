@@ -73,9 +73,9 @@ shopSearch.getOffers({
 ```
 
 ### Parameters
-*eshop_rules* - Defined eshop rules.
-*query* - Product name.
-*callback* - Function that returns products.
+- *eshop_rules* - Defined eshop rules.
+- *query* - Product name.
+- *callback* - Function that returns products.
 
 ## Return value
 A new array with product being the result of the callback function.
@@ -127,9 +127,9 @@ shopSearch.getOffers({
 ```
 
 ### Parameters
-*eshop_rules* - Defined object / array of eshop_rules.
-*query* - Product name.
-*callback* - Function that returns products.
+- *eshop_rules* - Defined object / array of eshop_rules.
+- *query* - Product name.
+- *callback* - Function that returns products.
 
 ## Return value
 A new object / array (as eshop_rules) with each shop with products being the result of the callback function.
