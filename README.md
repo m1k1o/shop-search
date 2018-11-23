@@ -80,14 +80,14 @@ shopSearch.getOffers({
 ## Return value
 A new array with product being the result of the callback function.
 ```js
-{
+[
     {
         name: 'Apple iPhone 7 32GB, rose gold',
         price: 539,
         url: 'https://www.okay.sk/apple-iphone-7-23-gb-mn912cn-a-ruzova-zlata/'
     },
     // ...
-}
+]
 ```
 
 # Function: getOffers
