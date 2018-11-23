@@ -132,7 +132,7 @@ shopSearch.getOffers({
 *callback* - Function that returns products.
 
 ## Return value
-A new array with each shop with products being the result of the callback function.
+A new object / array (as eshop_rules) with each shop with products being the result of the callback function.
 ```js
 {
     shop1: [
