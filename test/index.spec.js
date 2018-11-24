@@ -100,6 +100,20 @@ describe("shopSearch: sortProducts", function() {
         assert(Array.isArray(offers))
         assert.equal(offers.length, 0)
     })
+
+    it("sortProducts works with array too", function() {
+        const expected_response_Array = Object.values(expected_response)
+
+        let expected = {
+            shop: '0',
+            name: 'Pouzdro Col Fr iPhone 7/8 red ROZBALENÉ',
+            price: 9.8,
+            url: 'https://www.okay.sk/pouzdro-col-fr-iphone-7-8-red-rozbalene/'
+        }
+        
+        let offers = shopSearch.sortProducts(expected_response_Array)
+        assert.deepEqual(offers[0], expected)
+    })
 })
   
 describe("shopSearch: parsePrice", function() {
