@@ -28,11 +28,15 @@ let getOffer = (shop, query, cb) =>
 
         const $ = cheerio.load(d)
 
-        let result = [];
-        (typeof shop.item === 'function'
-            ? shop.item
-            : ($, cb) => $(shop.item).each(cb)
-        )($, (i, e) => {
+        let result = []
+        let productsLoop = ($, cb) =>
+            $(shop.item).each(cb)
+
+        if(typeof shop.item === 'function') {
+            productsLoop = shop.item
+        }
+        
+        productsLoop($, (i, e) => {
             let elem = $(e)
             result.push({
                 name: typeof shop.name !== 'function' ? elem.find(shop.name).text().trim() : shop.name(elem),
