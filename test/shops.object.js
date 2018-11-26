@@ -11,7 +11,7 @@ module.exports = {
     },
     // Only functions
     mall: {
-        serpUrl: (query) => 'https://www.mall.sk/hladaj?s='+query,
+        serpUrl: (query) => 'https://www.mall.sk/hladaj?s='+encodeURIComponent(query),
         item: ($, cb) => $('.lst-item').each(cb),
         name: (elem) => elem.find('.lst-product-item-title a').text().trim(),
         price: (elem) => parsePrice(elem.find('.lst-product-item-price-value').text()),

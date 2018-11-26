@@ -24,7 +24,7 @@ let sortProducts = (shops, reverse = false) => {
 }
 
 let getOffer = (shop, query, cb) =>
-    request(typeof shop.serpUrl !== 'function' ? shop.serpUrl+query : shop.serpUrl(query), (e, { statusCode }, d) => {
+    request(typeof shop.serpUrl !== 'function' ? shop.serpUrl+encodeURIComponent(query) : shop.serpUrl(query), (e, { statusCode }, d) => {
         if (statusCode !== 200) {
             return cb(new Error(statusCode));
         }
