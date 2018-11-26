@@ -3,7 +3,7 @@ const assert = require("assert")
 const fs = require("fs")
 
 const shops = require("./shops.object.js")
-const expected_response = {
+const expectedResponse = {
     okay: require("./responses/okay.js"),
     alza: require("./responses/alza.js"),
     mall: require("./responses/mall.js")
@@ -30,9 +30,9 @@ shopSearch.__set__("request", (url, cb) => response404
 
 describe("shopSearch: getOffer", function() {
     it("getOffer is working as expected", function(done) {
-        let shop_name = Object.keys(expected_response)[0]
-        shopSearch.getOffer(shops[shop_name], 'iphone 7', (e, d) => {
-            assert.deepEqual(d, expected_response[shop_name])
+        let shopName = Object.keys(expectedResponse)[0]
+        shopSearch.getOffer(shops[shopName], 'iphone 7', (e, d) => {
+            assert.deepEqual(d, expectedResponse[shopName])
             done(e)
         })
     })
@@ -41,19 +41,19 @@ describe("shopSearch: getOffer", function() {
 describe("shopSearch: getOffers", function() {
     it("getOffers is working as expected with Object", function(done) {
         shopSearch.getOffers(shops, 'iphone 7', (e, d) => {
-            assert.deepEqual(d, expected_response)
+            assert.deepEqual(d, expectedResponse)
             done(e)
         })
     })
     
     it("getOffers is working as expected with Array too", function(done) {
-        const shops_Array = Object.values(shops)
-        const expected_response_Array = Object.values(expected_response)
+        const shopsArray = Object.values(shops)
+        const expectedResponseArray = Object.values(expectedResponse)
 
-        shopSearch.getOffers(shops_Array, 'iphone 7', (e, d) => {
+        shopSearch.getOffers(shopsArray, 'iphone 7', (e, d) => {
             // Any order
-            for (const i in expected_response_Array) {
-                assert(d.indexOf(expected_response_Array[i]))
+            for (const i in expectedResponseArray) {
+                assert(d.indexOf(expectedResponseArray[i]))
             }
 
             done(e)
@@ -79,7 +79,7 @@ describe("shopSearch: sortProducts", function() {
             url: 'https://www.okay.sk/pouzdro-col-fr-iphone-7-8-red-rozbalene/'
         }
         
-        let offers = shopSearch.sortProducts(expected_response)
+        let offers = shopSearch.sortProducts(expectedResponse)
         assert.deepEqual(offers[0], expected)
     })
   
@@ -91,7 +91,7 @@ describe("shopSearch: sortProducts", function() {
             "url": "https://www.mall.sk/apple-iphone/apple-iphone-xs-max-512gb-vesmirne-sedy"
         }
         
-        let offers = shopSearch.sortProducts(expected_response, true)
+        let offers = shopSearch.sortProducts(expectedResponse, true)
         assert.deepEqual(offers[0], expected)
     })
 
@@ -102,7 +102,7 @@ describe("shopSearch: sortProducts", function() {
     })
 
     it("sortProducts works with array too", function() {
-        const expected_response_Array = Object.values(expected_response)
+        const expectedResponseArray = Object.values(expectedResponse)
 
         let expected = {
             shop: '0',
@@ -111,7 +111,7 @@ describe("shopSearch: sortProducts", function() {
             url: 'https://www.okay.sk/pouzdro-col-fr-iphone-7-8-red-rozbalene/'
         }
         
-        let offers = shopSearch.sortProducts(expected_response_Array)
+        let offers = shopSearch.sortProducts(expectedResponseArray)
         assert.deepEqual(offers[0], expected)
     })
 })

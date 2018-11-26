@@ -14,7 +14,7 @@ Fetch products from selected eshop.
 const shopSearch = require("./index.js")
 
 shopSearch.getOffer({
-    serp_url: 'https://www.okay.sk/hladanie/?query=',
+    serpUrl: 'https://www.okay.sk/hladanie/?query=',
     item: '.crossroad-products-big li .inner',
     name: '.title a',
     price: '.price .highlight span',
@@ -28,8 +28,8 @@ shopSearch.getOffer({
 Simple usage:
 ```js
 shopSearch.getOffers({
-    // serp_url + query
-    serp_url: 'http://example.com?query=',
+    // serpUrl + query
+    serpUrl: 'http://example.com?query=',
     // Find all relevant elements on page
     item: '.crossroad-products-big li .inner',
     // Get text from element
@@ -45,7 +45,7 @@ Advanced usage:
 ```js
 shopSearch.getOffers({
     // Search engine result page URL
-    serp_url: (query) => {
+    serpUrl: (query) => {
         return 'http://example.com?query='+query
     },
     // Call processItem for each product,
@@ -61,19 +61,19 @@ shopSearch.getOffers({
     },
     // Get price, elem is that one from processItem
     price: (elem) => {
-        let price_text = elem.find('.product-price').text().trim()
-        return parseInt(price_text)
+        let priceText = elem.find('.product-price').text().trim()
+        return parseInt(priceText)
     },
     // Get url, elem is that one from processItem
     url: (elem) => {
-        let rel_url = elem.find('.product-url').attr('href')
-        return 'http://example.com'+rel_url
+        let relUrl = elem.find('.product-url').attr('href')
+        return 'http://example.com'+relUrl
     }
 }, query, callback)
 ```
 
 ### Parameters
-- *eshop_rules* - Defined eshop rules.
+- *eshopRules* - Defined eshop rules.
 - *query* - Product name.
 - *callback* - Function that returns products.
 
@@ -99,14 +99,14 @@ const shopSearch = require("./index.js")
 
 shopSearch.getOffers({
     mall: {
-        serp_url: (query) => 'https://www.mall.sk/hladaj?s='+query,
+        serpUrl: (query) => 'https://www.mall.sk/hladaj?s='+query,
         item: ($, cb) => $('.lst-item').each(cb),
         name: (elem) => elem.find('.lst-product-item-title a').text().trim(),
         price: (elem) => parsePrice(elem.find('.lst-product-item-price-value').text()),
         url: (elem) => 'https://www.mall.sk'+elem.find('.lst-product-item-title a').attr('href')
     },
     okay: {
-        serp_url: 'https://www.okay.sk/hladanie/?query=',
+        serpUrl: 'https://www.okay.sk/hladanie/?query=',
         item: '.crossroad-products-big li .inner',
         name: '.title a',
         price: '.price .highlight span',
@@ -120,19 +120,19 @@ shopSearch.getOffers({
 ## Syntax:
 ```js
 shopSearch.getOffers({
-    shop1: /*eshop_rules*/,
-    shop2: /*eshop_rules*/,
+    shop1: /*eshopRules*/,
+    shop2: /*eshopRules*/,
     // ...
 }, query, callback)
 ```
 
 ### Parameters
-- *eshop_rules* - Defined object / array of eshop_rules.
+- *eshopRules* - Defined object / array of eshopRules.
 - *query* - Product name.
 - *callback* - Function that returns products.
 
 ## Return value
-A new object / array (as eshop_rules) with each shop with products being the result of the callback function.
+A new object / array (as eshopRules) with each shop with products being the result of the callback function.
 ```js
 {
     shop1: [
