@@ -15,8 +15,11 @@ let sortProducts = (shops, reverse = false) => {
             offers.push({ "shop": shop, ...offer }))
     }
     
-    let i = 1 - reverse * 2
-    offers.sort((a, b) => i * a.price - i * b.price)
+    if(reverse)
+        offers.sort((a, b) => a.price - b.price)
+    else 
+        offers.sort((a, b) => b.price - a.price)
+
     return offers
 }
 
