@@ -72,27 +72,13 @@ describe("shopSearch: getOffers", function() {
   
 describe("shopSearch: sortProducts", function() {
     it("sortProducts gets cheapest product", function() {
-        let expected = {
-            shop: 'okay',
-            name: 'Pouzdro Col Fr iPhone 7/8 red ROZBALENÉ',
-            price: 9.8,
-            url: 'https://www.okay.sk/pouzdro-col-fr-iphone-7-8-red-rozbalene/'
-        }
-        
         let offers = shopSearch.sortProducts(expectedResponse)
-        assert.deepEqual(offers[0], expected)
+        assert.deepEqual(offers[0].price, 9.8)
     })
   
     it("reversed sortProducts gets most expensive product", function() {
-        let expected = {
-            "name": "Apple iPhone Xs Max, 512GB, Vesmírne šedý",
-            "price": 1679,
-            "shop": "mall",
-            "url": "https://www.mall.sk/apple-iphone/apple-iphone-xs-max-512gb-vesmirne-sedy"
-        }
-        
         let offers = shopSearch.sortProducts(expectedResponse, true)
-        assert.deepEqual(offers[0], expected)
+        assert.deepEqual(offers[0].price, 1679)
     })
 
     it("sortProducts does not fail on junk data", function() {
