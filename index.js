@@ -16,9 +16,9 @@ let sortProducts = (shops, reverse = false) => {
     }
     
     if(reverse)
-        offers.sort((a, b) => a.price - b.price)
-    else 
         offers.sort((a, b) => b.price - a.price)
+    else 
+        offers.sort((a, b) => a.price - b.price)
 
     return offers
 }
